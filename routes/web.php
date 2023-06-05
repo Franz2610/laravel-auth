@@ -3,6 +3,8 @@
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\DachboardController;
+use App\Http\Controllers\Admin\PostController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -20,6 +22,7 @@ Route::get('/', function () {
 
 Route::middleware(['auth', 'verified'])->name('admin.')->prefix('admin')->group(function(){
     Route::get('/', [DachboardController::class, 'index'])->name('dashboard');
+    Route::resource('posts', PostController::class)->parameters(['posts'=>'post:slug']);
 });
 
 // Route::get('/dashboard', function () {
