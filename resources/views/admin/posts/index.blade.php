@@ -29,8 +29,8 @@
                 <td> {{$post->created_at}} </td>
                 <td class="d-flex justify-content-between"> <a class="m-1" href="{{ route('admin.posts.show', $post->slug) }}"><button class="btn btn-warning"> Show</button></a>
                  <a class="m-1" href="{{ route('admin.posts.edit', $post->slug) }}"><button class="btn btn-success"> Edit</button></a>
-                <form action="{{route('admin.posts.destroy', $post->slug)}}" method="POST">
-                   @csrf
+                   <form action="{{route('admin.posts.destroy', $post->slug)}}" method="POST">
+                    @csrf
                    @method("DELETE")
                         <button  class="btn btn-danger m-1" type="submit">Delete</button>
                     </form>

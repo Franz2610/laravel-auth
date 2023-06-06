@@ -6,6 +6,7 @@ use App\Models\Project;
 use App\Http\Requests\StoreProjectRequest;
 use App\Http\Requests\UpdateProjectRequest;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Str;
 
 class ProjectController extends Controller
 {
@@ -38,7 +39,18 @@ class ProjectController extends Controller
      */
     public function store(StoreProjectRequest $request)
     {
-        //
+        $data = $request->validated();
+        $slug= Str::slug($data['name'], '-');
+        $data['slug'] = $slug;
+        $project = new Project();
+        $project->fill($data);
+        $project->save();
+        return redirect()->route('admin.posts.index' , $project->slug);
+
+
+
+        // $data=$request->validate();
+        // $project = Project::create($data);
     }
 
     /**
@@ -72,7 +84,12 @@ class ProjectController extends Controller
      */
     public function update(UpdateProjectRequest $request, Project $project)
     {
-        //
+        $data = $request->validated();
+        $slug= Str::slug($data->name, '-');
+        $data['slug'] = $slug;
+        $project->update($data);
+        return redirect()->route('admin.projects.index', $project->slug)->with('message', 'Il post è stato aggiornato.');
+
     }
 
     /**

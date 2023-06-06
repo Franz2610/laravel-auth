@@ -13,7 +13,7 @@ class UpdateProjectRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -24,7 +24,19 @@ class UpdateProjectRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'name' => 'required',
+            'image' => 'required',
+            'bodytexr' => 'required|min:20',
+            'languages' => 'required|min:2'
+        ];
+    }
+
+    public function messages(){
+        return [
+            'name.required' => 'Il nome è obbligatoriio',
+            'bodytext.min' => 'Componi 3 caratteri',
+            'languages.min' => 'Scrivi almeno 2 caratteri',
+            'image.max' => 'La URL deve essere lunga massimo :max caratter! '
         ];
     }
 }

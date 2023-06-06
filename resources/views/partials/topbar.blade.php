@@ -67,6 +67,12 @@
                     <span>Projects</span>
                 </a>
             </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{{ route('admin.projects.index') }}">
+                    <i class="fa-solid fa-layer-group"></i>
+                    <span>Categorys</span>
+                </a>
+            </li>
               <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                   Dropdown
