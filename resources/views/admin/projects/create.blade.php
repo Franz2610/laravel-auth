@@ -2,7 +2,7 @@
 
 @section('content')
     <h1>Create Project</h1>
-    <form action="{{ route('admin.projects.store') }}" method="POST">
+    <form action="{{ route('admin.projects.store') }}" method="POST" enctype="multipart/form-data">
         @csrf
         <div class="mb-3">
             <label for="title">Name</label>
@@ -19,7 +19,7 @@
         </div>
         <div class="mb-3">
             <label for="image">Image</label>
-            <input type="url" class="form-control @error('image') is-invali
+            <input type="file" class="form-control @error('image') is-invali
 
             @enderror" name="image" id="image">
             @error('image')
