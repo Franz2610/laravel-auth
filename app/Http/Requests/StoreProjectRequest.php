@@ -26,8 +26,10 @@ class StoreProjectRequest extends FormRequest
         return [
             'name' => 'required',
             'image' => 'required',
-            'bodytexr' => 'required|min:20',
-            'languages' => 'required|min:2'
+            'bodytext' => 'required|min:20',
+            'languages' => 'required|min:2',
+            'typemodel_id' => 'nullable|exists:typemodels,id',
+            'tags' => 'nullable|email:tags,id'
         ];
     }
 

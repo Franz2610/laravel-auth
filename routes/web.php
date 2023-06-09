@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\DachboardController;
 use App\Http\Controllers\Admin\PostController;
 use App\Http\Controllers\Admin\ProjectController;
+use App\Http\Controllers\Admin\TagController;
 
 /*
 |--------------------------------------------------------------------------
@@ -25,6 +26,8 @@ Route::middleware(['auth', 'verified'])->name('admin.')->prefix('admin')->group(
     Route::get('/', [DachboardController::class, 'index'])->name('dashboard');
     Route::resource('posts', PostController::class)->parameters(['posts'=>'post:slug']);
     Route::resource('projects', ProjectController::class)->parameters(['projects'=>'project:slug']);
+    Route::resource('tags', TagController::class);
+
 
 });
 

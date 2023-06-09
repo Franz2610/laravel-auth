@@ -22,6 +22,8 @@ class DatabaseSeeder extends Seeder
         // ]);
         $this->call([
             PostSeeder::class,
+            TagSeeder::class,
+            TypemodelSeeder::class,
         ]);
     }
 }

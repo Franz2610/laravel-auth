@@ -6,10 +6,23 @@
         @csrf
         @method('PUT')
         <div class="mb-3">
-            <label for="title">Name</label>
+            <label for="name">Name</label>
             <input type="text" class="form-control @error('name') is-invali
 
-            @enderror" name="title" id="title" required maxlength="150" minlength="1" value="{{old('name',$project->title)}}">
+            @enderror" name="name" id="name" required maxlength="150" minlength="1" value="{{old('name', $project->name)}}">
+
+            @error('name')
+            <div class="invalid-feedback">
+                 {{$message}}
+            </div>
+
+            @enderror
+        </div>
+        <div class="mb-3">
+            <label for="languages">Name</label>
+            <input type="text" class="form-control @error('languages') is-invali
+
+            @enderror" name="languages" id="languages" required maxlength="150" minlength="1" value="{{old('languages', $project->languages)}}">
 
             @error('name')
             <div class="invalid-feedback">
@@ -22,7 +35,7 @@
             <label for="image">Image</label>
             <input type="url" class="form-control @error('image') is-invali
 
-            @enderror" name="image" id="image" value="{{old('image',$project->image)}}">
+            @enderror" name="image" id="image" value="{{old('image', $project->image)}}">
             @error('image')
             <div class="invalid-feedback">
                 {{$message}}
@@ -30,11 +43,22 @@
 
             @enderror
         </div>
+        <label for="thumb" class="form-label text-white">Seleziona tecologia</label>
+        <select class="form-select " name="typemodel_id" id="typemodel_id">
+
+            <option selected class="text-white">Seleziona tecnologia</option>
+            @foreach ($typemodels as $typemodel)
+                <option value="{{ $typemodel->id }} "
+                    {{ $typemodel->id == old('type_id', $project->typemodel_id) ? 'selected' : '' }}>
+                    {{ $typemodel->name }}</option>
+            @endforeach
+
+        </select>
         <div class="mb-3">
-            <label for="body">Body Text</label>
+            <label for="bodytext">Body Text</label>
             <textarea name="body" id="body" rows="10" class="form-control @error('bodytext') is-invali
 
-            @enderror" value="{{old('bodytext',$project->bodytexr)}}"></textarea>
+            @enderror" value="{{old('bodytext', $project->bodytext)}}"></textarea>
             @error('bodytext')
             <div class="invalid-feedback">
                 {{$message}}

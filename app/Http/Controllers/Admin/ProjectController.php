@@ -3,9 +3,11 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Models\Project;
+use App\Models\Typemodel;
 use App\Http\Requests\StoreProjectRequest;
 use App\Http\Requests\UpdateProjectRequest;
 use App\Http\Controllers\Controller;
+use App\Models\Tag;
 use Illuminate\Support\Str;
 use illuminate\Support\Facades\Storage;
 
@@ -29,7 +31,9 @@ class ProjectController extends Controller
      */
     public function create()
     {
-        return view('admin.projects.create');
+        $typemodels = Typemodel::all();
+        $tags = Tag::all();
+        return view('admin.projects.create', compact('typemodels' , 'tags'));
     }
 
     /**
@@ -40,19 +44,27 @@ class ProjectController extends Controller
      */
     public function store(StoreProjectRequest $request)
     {
-        $data = $request->validated();
-        $slug= Str::slug($data['name'], '-');
-        $data['slug'] = $slug;
-        if($request->hasFile('image')){
-            $image_path = Storage::put('uploads', $request->image);
-            $data['image'] = $image_path;
+        // $data = $request->validated();
+        // $slug= Str::slug($data['name'], '-');
+        // $data['slug'] = $slug;
+        // if($request->hasFile('image')){
+        //     $image_path = Storage::put('uploads', $request->image);
+        //     $data['image'] = $image_path;
 
-        }
+        // }
 
-        $project = new Project();
-        $project->fill($data);
-        $project->save();
-        return redirect()->route('admin.projects.index' , $project->slug);
+        // $project = new Project();
+        // $project->fill($data);
+        // $project->save();
+        // return redirect()->route('admin.projects.index' , $project->slug);
+        $form_data = $request->validated();
+        // $slug= Str::slug($form_data['name'], '-');
+        // $form_data['slug'] = $slug;
+        $project = Project::create($form_data);
+       if( $request->has('tags')){
+        $project->attach($request->tags);
+       };
+        return redirect()->route('admin.projects.show', $project->id);
 
 
 
@@ -79,7 +91,8 @@ class ProjectController extends Controller
      */
     public function edit(Project $project)
     {
-        return view('admin.projects.edit' , compact('project'));
+        $typemodels = Typemodel::all();
+        return view('admin.projects.edit' , compact('project' ,'typemodels'));
     }
 
     /**
@@ -91,11 +104,18 @@ class ProjectController extends Controller
      */
     public function update(UpdateProjectRequest $request, Project $project)
     {
-        $data = $request->validated();
-        $slug= Str::slug($data->name, '-');
-        $data['slug'] = $slug;
-        $project->update($data);
-        return redirect()->route('admin.projects.index', $project->slug)->with('message', 'Il post è stato aggiornato.');
+        // $data = $request->validated();
+        // $slug= Str::slug($data->name, '-');
+        // $data['slug'] = $slug;
+        // $project->update($data);
+        // return redirect()->route('admin.projects.index', $project->slug)->with('message', 'Il post è stato aggiornato.');
+
+        $form_data = $request->validated();
+        // $slug= Str::slug($form_data->name, '-');
+        // $form_data['slug'] = $slug;
+        $project->update($form_data);
+        $characters = Project::all();
+        return view('admin.projects.index', compact('projects'));
 
     }
 
