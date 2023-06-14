@@ -10,8 +10,10 @@
         @if ($project->tags && count($project->tags) > 0)
             <div>
                  @foreach ($project->tags as $tag)
-                    <a href="{{ route('admin.tags.show', $tag->slug) }}"
-                                                class="badge rounded-pill bg-primary text-white">{{ $tag->name }}</a>
+                 <p>{{$tag->slug}}</p>
+                 <p> {{$tag->name}} </p>
+                    {{-- <a href="{{ route('admin.projects.show', $tag->slug) }}"
+                                                class="badge rounded-pill bg-primary text-white">{{ $tag->name }}</a> --}}
                     @endforeach
             </div>
          @endif

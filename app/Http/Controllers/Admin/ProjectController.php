@@ -48,7 +48,7 @@ class ProjectController extends Controller
     public function store(StoreProjectRequest $request)
     {
         $data = $request->validated();
-        $slug = Str::slug($data['title'], '-');
+        $slug = Str::slug($data['name'], '-');
         $data['slug'] = $slug;
         $project = Project::create($data);
         if ($request->has('tags')) {

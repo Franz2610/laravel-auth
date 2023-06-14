@@ -29,7 +29,7 @@ class StoreProjectRequest extends FormRequest
             'bodytext' => 'required|min:20',
             'languages' => 'required|min:2',
             'typemodel_id' => 'nullable|exists:typemodels,id',
-            'tags' => 'nullable|email:tags,id'
+            'tags' => 'nullable|exists:tags,id'
         ];
     }
 

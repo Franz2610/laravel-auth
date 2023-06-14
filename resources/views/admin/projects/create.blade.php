@@ -2,74 +2,82 @@
 
 @section('content')
     <h1>Create NewProject</h1>
+    @if ($errors->any())
+        <div class="alert alert-danger">
+            <ul>
+                @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
+    @endif
     <form action="{{ route('admin.projects.store') }}" method="POST" enctype="multipart/form-data">
         @csrf
         <div class="mb-3">
             <label for="name">Name</label>
             <input type="text" class="form-control @error('name') is-invali
 
-            @enderror" name="name" id="name">
+            @enderror" name="name"
+                id="name">
 
             @error('name')
-            <div class="invalid-feedback">
-                 {{$message}}
-            </div>
-
+                <div class="invalid-feedback">
+                    {{ $message }}
+                </div>
             @enderror
         </div>
         <div class="mb-3">
             <label for="languages">Languages</label>
             <input type="text" class="form-control @error('languages') is-invali
 
-            @enderror" name="languages" id="languages" >
+            @enderror" name="languages"
+                id="languages">
 
             @error('languages')
-            <div class="invalid-feedback">
-                 {{$message}}
-            </div>
-
+                <div class="invalid-feedback">
+                    {{ $message }}
+                </div>
             @enderror
         </div>
         <div class="mb-3">
             <label for="image">Image</label>
             <input type="file" class="form-control @error('image') is-invali
 
-            @enderror" name="image" id="image">
+            @enderror" name="image"
+                id="image">
             @error('image')
-            <div class="invalid-feedback">
-                {{$message}}
-           </div>
-
+                <div class="invalid-feedback">
+                    {{ $message }}
+                </div>
             @enderror
         </div>
         <div class="form-group p-4">
             <p>Seleziona Tag</p>
-            @foreach ($tags as $tag )
-            <div>
-                <input type="checkbox" name="tags[]" value="{{$tag->id}}" class="form-check-input" {{ in_array($tag->id, old('tags', [])) ? 'checked' : '' }}>
-                <label for="" class="form-check-label"> {{$tag->name}} </label>
-            </div>
-
+            @foreach ($tags as $tag)
+                <div>
+                    <input type="checkbox" name="tags[]" value="{{ $tag->id }}" class="form-check-input"
+                        {{ in_array($tag->id, old('tags', [])) ? 'checked' : '' }}>
+                    <label for="" class="form-check-label"> {{ $tag->name }} </label>
+                </div>
             @endforeach
 
             @error('tags')
-            <div class="invalid-feedback">
-                {{$message}}
-           </div>
-
+                <div class="invalid-feedback">
+                    {{ $message }}
+                </div>
             @enderror
 
         </div>
         <div class="mb-3">
             <label for="bodytext">Body Text</label>
-            <textarea name="bodytext" id="bodytext" rows="10" class="form-control @error('bodytext') is-invali
+            <textarea name="bodytext" id="bodytext" rows="10"
+                class="form-control @error('bodytext') is-invali
 
             @enderror"></textarea>
             @error('bodytext')
-            <div class="invalid-feedback">
-                {{$message}}
-           </div>
-
+                <div class="invalid-feedback">
+                    {{ $message }}
+                </div>
             @enderror
         </div>
         <div class="form-group">
