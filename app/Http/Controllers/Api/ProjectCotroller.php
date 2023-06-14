@@ -16,22 +16,22 @@ class ProjectCotroller extends Controller
             'results'=> $projects
         ]);
     }
-    // public function show($slug)
-    // {
-    //     $project = Project::with('typemo', 'tags')->where('slug', $slug)->first();
+    public function show($id)
+    {
+        $project = Project::with('typemodel')->where('id', $id)->first();
 
-    //     if ($project) {
-    //         return response()->json([
-    //             'success' => true,
-    //             'results' => $project
-    //         ]);
-    //     } else {
-    //         return response()->json([
-    //             'success' => false,
-    //             'results' => 'Project not found !'
-    //         ]);
-    //     }
+        if ($project) {
+            return response()->json([
+                'success' => true,
+                'results' => $project
+            ]);
+        } else {
+            return response()->json([
+                'success' => false,
+                'results' => 'Project not found !'
+            ]);
+        }
 
 
-    // }
+    }
 }
