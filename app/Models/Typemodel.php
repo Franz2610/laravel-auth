@@ -9,7 +9,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 class Typemodel extends Model
 {
     use HasFactory;
-    protected $fillable = ['name'];
+    protected $guarded = [];
     public function projects(): HasMany
     {
         return $this->hasMany(Project::class);

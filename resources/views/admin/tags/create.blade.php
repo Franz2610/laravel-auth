@@ -1,75 +1,68 @@
-{{-- @extends('layouts.admin')
+@extends('layouts.admin')
 
 @section('content')
-    <h1>Create Newtag</h1>
-    <form action="{{ route('admin.tags.store') }}" method="POST" enctype="multipart/form-data">
-        @csrf
-        <div class="mb-3">
-            <label for="name">Name</label>
-            <input type="text" class="form-control @error('name') is-invali
-
-            @enderror" name="name" id="name">
-
-            @error('name')
-            <div class="invalid-feedback">
-                 {{$message}}
+    <div class="container">
+        <h1 class="text-white fs-1 mt-4 mb-4">Crea il tuo Post</h1>
+        <form action="{{ route('admin.projects.store') }}" method="POST">
+            @csrf
+            <div class="mb-3">
+                <label class="text-white  mb-2" for="title">Titolo</label>
+                <input type="text" class="form-control @error('title')
+                is-invalid
+            @enderror"
+                    name="title" id="title" required maxlength="150" minlength="3">
+                @error('title')
+                    <div class="invalid-feedback ">
+                        {{ $message }}
+                    </div>
+                @enderror
             </div>
-
-            @enderror
-        </div>
-        <div class="mb-3">
-            <label for="languages">Languages</label>
-            <input type="text" class="form-control @error('languages') is-invali
-
-            @enderror" name="languages" id="languages" >
-
-            @error('languages')
-            <div class="invalid-feedback">
-                 {{$message}}
+            <div class="mb-3">
+                <label class="text-white  mb-2" for="image">Carica l'url della tua immagine</label>
+                <input type="url" class="form-control @error('image')
+                is-invalid
+            @enderror"
+                    name="image" id="image" required maxlength="255">
+                @error('image')
+                    {{ $message }}
+                @enderror
             </div>
-
-            @enderror
-        </div>
-        <div class="mb-3">
-            <label for="image">Image</label>
-            <input type="file" class="form-control @error('image') is-invali
-
-            @enderror" name="image" id="image">
-            @error('image')
-            <div class="invalid-feedback">
-                {{$message}}
-           </div>
-
-            @enderror
-        </div>
-        <label for="thumb" class="form-label text-white">Seleziona tecologia</label>
-        <select class="form-select " name="typemodel_id" id="typemodel_id">
-
-            <option selected class="text-white">Seleziona tecnologia</option>
-            @foreach ($typemodels as $typemodel)
-                <option value="{{ $typemodel->id }} "
-                    {{ $typemodel->id == old('type_id', $tag->typemodel_id) ? 'selected' : '' }}>
-                    {{ $typemodel->name }}</option>
-            @endforeach
-
-        </select>
-        <div class="mb-3">
-            <label for="bodytext">Body Text</label>
-            <textarea name="bodytext" id="bodytext" rows="10" class="form-control @error('bodytext') is-invali
-
+            <div class="mb-3">
+                <label class="text-white mb-2" for="body">Scrivi la descrizione del tuo testo</label>
+                <textarea name="body" id="body" rows="10"
+                    class="form-control  @error('body')
+                is-invalid
             @enderror"></textarea>
-            @error('bodytext')
-            <div class="invalid-feedback">
-                {{$message}}
-           </div>
+                @error('body')
+                    {{ $message }}
+                @enderror
+            </div>
+            <label class="text-white mb-2">Seleziona tecnologia</label>
+            <select class="form-select" name="type_id" id="type_id" aria-label="Default select example">
 
-            @enderror
+                <option selected></option>
+                @foreach ($types as $type)
+                    <option value="{{ $type->id }}">{{ $type->name }}</option>
+                @endforeach
+
+            </select>
+            <div class="mt-3 d-grid gap-2 d-md-block">
+                <button type="submit" class="btn btn-outline-success">Save</button>
+                <button type="reset" class="btn btn-outline-light">Reset</button>
+            </div>
+
+        </form>
+        <div class="d-grid gap-2 d-md-block">
+            <a class="btn mt-3 btn-outline-primary btn-lg mx-auto" href="{{ route('admin.projects.index') }}">Torna ai
+                tuoi
+                progetti</a>
         </div>
-        <button type="submit" class="btn btn-success">Save</button>
-        <button type="reset" class="btn btn-primary">Reset</button>
-    </form>
+
+    </div>
+    </div>
     <script src="//js.nicedit.com/nicEdit-latest.js" type="text/javascript"></script>
     <script type="text/javascript">
         bkLib.onDomLoaded(nicEditors.allTextAreas);
     </script>
-@endsection --}}
+    </div>
+@endsection

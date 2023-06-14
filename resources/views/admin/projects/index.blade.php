@@ -25,7 +25,7 @@
             <tr>
                 <th scope="row">{{ $project->id }}</th>
                 <td> {{$project->name}} </td>
-                <td><img src="{{$project->image}}" alt="{{$project->title}}"></td>
+                <td><img src="{{$project->image}}" alt="{{$project->name}}"></td>
                 <td> {{$project->created_at}} </td>
                 <td class="d-flex justify-content-between"> <a class="m-1" href="{{ route('admin.projects.show', $project->slug) }}"><button class="btn btn-warning"> Show</button></a>
                  <a class="m-1" href="{{ route('admin.projects.edit', $project->slug) }}"><button class="btn btn-success"> Edit</button></a>

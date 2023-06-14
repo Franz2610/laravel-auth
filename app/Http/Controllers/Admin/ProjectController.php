@@ -21,7 +21,10 @@ class ProjectController extends Controller
     public function index()
     {
         $projects = Project::all();
-        return view('admin.projects.index', compact('projects'));
+        $tags = Tag::all();
+        $typemodels = Typemodel::all();
+
+        return view('admin.projects.index', compact('projects', 'tags', 'typemodels'));
     }
 
     /**
@@ -44,28 +47,11 @@ class ProjectController extends Controller
      */
     public function store(StoreProjectRequest $request)
     {
-        // $data = $request->validated();
-        // $slug= Str::slug($data['name'], '-');
-        // $data['slug'] = $slug;
-        // if($request->hasFile('image')){
-        //     $image_path = Storage::put('uploads', $request->image);
-        //     $data['image'] = $image_path;
-
-        // }
-
-        // $project = new Project();
-        // $project->fill($data);
-        // $project->save();
-        // return redirect()->route('admin.projects.index' , $project->slug);
-        $form_data = $request->validated();
-        // $slug= Str::slug($form_data['name'], '-');
-        // $form_data['slug'] = $slug;
-        $project = Project::create($form_data);
-       if( $request->has('tags')){
-        $project->attach($request->tags);
-       };
-        return redirect()->route('admin.projects.show', $project->id);
-
+        $data = $request->validated();
+        $slug = Str::slug($data['title'], '-');
+        $data['slug'] = $slug;
+        $project = Project::create($data);
+        return redirect()->route('admin.projects.show', $project->slug);
 
 
         // $data=$request->validate();
@@ -104,18 +90,11 @@ class ProjectController extends Controller
      */
     public function update(UpdateProjectRequest $request, Project $project)
     {
-        // $data = $request->validated();
-        // $slug= Str::slug($data->name, '-');
-        // $data['slug'] = $slug;
-        // $project->update($data);
-        // return redirect()->route('admin.projects.index', $project->slug)->with('message', 'Il post è stato aggiornato.');
-
-        $form_data = $request->validated();
-        // $slug= Str::slug($form_data->name, '-');
-        // $form_data['slug'] = $slug;
-        $project->update($form_data);
-        $characters = Project::all();
-        return view('admin.projects.index', compact('projects'));
+        $data = $request->validated();
+        $slug = Str::slug($request->title, '-');
+        $data['slug'] = $slug;
+        $project->update($data);
+        return redirect()->route('admin.projects.show', $project->slug)->with('message', 'Il post è stato modificato con successo!');
 
     }
 

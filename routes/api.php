@@ -2,6 +2,7 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Api\ProjectCotroller;
 
 /*
 |--------------------------------------------------------------------------
@@ -14,6 +15,12 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
-});
+// Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
+//     return $request->user();
+// });
+
+// Route::get('/projects', [ProjectController::class, 'index']);
+// Route::get('/projects/{slug}', [ProjectController::class, 'show']);
+
+Route::get('/projects', [ProjectCotroller::class, 'index']);
+Route::get('/projects/{slug}', [ProjectCotroller::class, 'show']);

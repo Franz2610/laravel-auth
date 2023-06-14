@@ -16,7 +16,7 @@
             <th scope="col">ID</th>
             <th scope="col">Name</th>
             <th scope="col">Create</th>
-            <th scope="col">Options</th>
+
           </tr>
         </thead>
         <tbody>

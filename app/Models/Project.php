@@ -8,9 +8,13 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 class Project extends Model
 {
     use HasFactory;
-    protected $fillable =['name', 'slug' , 'image', 'bodytext' , 'languages'];
-    public function type(): BelongsTo
+    protected $guarded =[];
+    public function typemodel(): BelongsTo
     {
         return $this->belongsTo(Typemodel::class);
+    }
+    public function tags(){
+        return $this->belongsToMany(Tag::class);
+
     }
 }
