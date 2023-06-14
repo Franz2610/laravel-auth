@@ -18,7 +18,7 @@ class ProjectCotroller extends Controller
     }
     public function show($id)
     {
-        $project = Project::with('typemodel')->where('id', $id)->first();
+        $project = Project::with('typemodel' , 'tags')->where('id', $id)->first();
 
         if ($project) {
             return response()->json([

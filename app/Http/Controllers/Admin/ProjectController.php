@@ -51,6 +51,9 @@ class ProjectController extends Controller
         $slug = Str::slug($data['title'], '-');
         $data['slug'] = $slug;
         $project = Project::create($data);
+        if ($request->has('tags')) {
+            $project->tags()->attach($request->tags);
+        }
         return redirect()->route('admin.projects.show', $project->slug);
 
 
@@ -78,7 +81,8 @@ class ProjectController extends Controller
     public function edit(Project $project)
     {
         $typemodels = Typemodel::all();
-        return view('admin.projects.edit' , compact('project' ,'typemodels'));
+        $tags = Tag::all();
+        return view('admin.projects.edit' , compact('project' ,'typemodels', 'tags'));
     }
 
     /**
@@ -93,6 +97,11 @@ class ProjectController extends Controller
         $data = $request->validated();
         $slug = Str::slug($request->title, '-');
         $data['slug'] = $slug;
+        if ($request->has('tags')) {
+            $project->tags()->sync($request->tags);
+        } else {
+            $project->tags()->sync([]);
+        }
         $project->update($data);
         return redirect()->route('admin.projects.show', $project->slug)->with('message', 'Il post è stato modificato con successo!');
 

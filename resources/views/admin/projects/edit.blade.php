@@ -66,6 +66,24 @@
 
             @enderror
         </div> --}}
+        <div class="form-group">
+            <p>Select one or more tag:</p>
+            @foreach ($tags as $tag)
+                <div class="p-4">
+                    @if ($errors->any())
+                        <input type="checkbox" name="tags[]" value="{{ $tag->id }}" class="form-check-input"
+                            {{ in_array($tag->id, old('tags', [])) ? 'checked' : '' }}>
+                    @else
+                        <input type="checkbox" name="tags[]" value="{{ $tag->id }}" class="form-check-input"
+                            {{ $project->tags->contains($tag) ? 'checked' : '' }}>
+                    @endif
+                    <label for="" class="form-check-label">{{ $tag->name }}</label>
+                </div>
+            @endforeach
+            @error('tags')
+                <div class="invalid-feedback">{{ $message }}</div>
+            @enderror
+        </div>
         <button type="submit" class="btn btn-success">Save</button>
         <button type="reset" class="btn btn-primary">Reset</button>
     </form>
